@@ -5,7 +5,7 @@ const { register, login } = require('../controllers/userController');
 const {
   registerValidations,
   loginValidations,
-} = require('../validations/userValidation');
+} = require('../validations/userValidations');
 
 router.post('/register', registerValidations, register);
 router.post('/login', loginValidations, login);
