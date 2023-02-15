@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const CategoryModel = require('../models/CategoryModel');
+const CatgoryModel = require('../models/CategoryModel');
 
 class Category {
   async create(req, res) {
