@@ -1,21 +1,21 @@
 const { validationResult } = require('express-validator');
-const CatgoryModel = require('../models/CategoryModel');
+const CategoryModel = require('../models/CategoryModel');
 
 class Category {
   async create(req, res) {
     const errors = validationResult(req);
     const { name } = req.body;
     if (errors.isEmpty()) {
-      const exist = await CatgoryModel.findOne({ name });
+      const exist = await CategoryModel.findOne({ name });
       if (!exist) {
-        await CatgoryModel.create({ name });
+        await CategoryModel.create({ name });
         return res
-          .status(201)
-          .json({ message: 'Your category has created successfully!' });
+          .status(200)
+          .json({ message: 'Your category has created successfully !' });
       } else {
         return res
           .status(400)
-          .json({ errors: [{ msg: `${name} category is already exist` }] });
+          .json({ errors: [{ msg: `${name} Category is Already Exist!` }] });
       }
     } else {
       return res.status(400).json({ errors: errors.array() });
@@ -26,8 +26,8 @@ class Category {
     const perPage = 3;
     const skip = (page - 1) * perPage;
     try {
-      const count = await CatgoryModel.find({}).countDocuments();
-      const response = await CatgoryModel.find({})
+      const count = await CategoryModel.find({}).countDocuments();
+      const response = await CategoryModel.find({})
         .skip(skip)
         .limit(perPage)
         .sort({ updatedAt: -1 });
@@ -40,7 +40,7 @@ class Category {
   async fetchCategory(req, res) {
     const { id } = req.params;
     try {
-      const response = await CatgoryModel.findOne({ _id: id });
+      const response = await CategoryModel.findOne({ _id: id });
       return res.status(200).json({ category: response });
     } catch (error) {
       console.log(error.message);
@@ -51,19 +51,19 @@ class Category {
     const { name } = req.body;
     const errors = validationResult(req);
     if (errors.isEmpty()) {
-      const exist = await CatgoryModel.findOne({ name });
+      const exist = await CategoryModel.findOne({ name });
       if (!exist) {
-        const response = await CatgoryModel.updateOne(
+        const response = await CategoryModel.updateOne(
           { _id: id },
           { $set: { name } },
         );
         return res
           .status(200)
-          .json({ message: 'Your category has updated successfully!' });
+          .json({ message: 'Your Category has Updated Successfully!' });
       } else {
         return res
           .status(400)
-          .json({ errors: [{ msg: `${name} category is already exist` }] });
+          .json({ errors: [{ msg: `${name} Category is already exist!` }] });
       }
     } else {
       return res.status(400).json({ errors: errors.array() });
@@ -72,7 +72,7 @@ class Category {
   async deleteCategory(req, res) {
     const { id } = req.params;
     try {
-      await CatgoryModel.deleteOne({ _id: id });
+      await CategoryModel.deleteOne({ _id: id });
       return res
         .status(200)
         .json({ message: 'Category has deleted successfully!' });
@@ -83,7 +83,7 @@ class Category {
   }
   async allCategories(req, res) {
     try {
-      const categories = await CatgoryModel.find({});
+      const categories = await CategoryModel.find({});
       return res.status(200).json({ categories });
     } catch (error) {
       return res.status(500).json('Server internal error!');
@@ -91,7 +91,7 @@ class Category {
   }
   async randomCategories(req, res) {
     try {
-      const categories = await CatgoryModel.aggregate([
+      const categories = await CategoryModel.aggregate([
         { $sample: { size: 3 } },
       ]);
       return res.status(200).json({ categories });

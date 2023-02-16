@@ -11,9 +11,10 @@ const productRoutes = require('./routes/productRoutes');
 const paymentRoutes = require('./routes/payment');
 const orderRoutes = require('./routes/orderRoutes');
 
+console.log(env);
+
 // database connection
 connect();
-app.use(cors());
 
 //stripe api webhooks
 app.post(
@@ -27,10 +28,7 @@ app.post(
 
 // add middleware
 app.use(express.json());
-
-app.get('/', (req, res) => {
-  res.json({ msg: 'Welcome to LNC system' });
-});
+app.use(cors());
 
 //user routes
 app.use('/api', userRoutes);
@@ -38,6 +36,10 @@ app.use('/api', categoryRoutes);
 app.use('/api', productRoutes);
 app.use('/api', paymentRoutes);
 app.use('/api', orderRoutes);
+
+app.get('/', (req, res) => {
+  res.json({ msg: 'Welcome to LNC system' });
+});
 
 const port = env.PORT || 5000;
 
