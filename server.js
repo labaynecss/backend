@@ -6,8 +6,8 @@ const app = express();
 const path = require('path');
 
 //routes
-const userRoutes = require('../backend/routes/userRoutes');
-const categoryRoutes = require('../backend/routes/categoryRoutes');
+const userRoutes = require('./routes/userRoutes');
+const categoryRoutes = require('./routes/categoryRoutes');
 const productRoutes = require('./routes/productRoutes');
 const paymentRoutes = require('./routes/payment');
 const orderRoutes = require('./routes/orderRoutes');
