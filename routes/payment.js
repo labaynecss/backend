@@ -7,7 +7,6 @@ router.post(
   Authorization.authorized,
   PaymentController.paymentProcess,
 );
-
 router.post(
   '/webhook',
   express.raw({ type: 'application/json' }),

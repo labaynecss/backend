@@ -1,5 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_KEY);
-const User = require('../models/UserModel');
+const User = require('../models/User');
 const OrderModel = require('../models/OrderModel');
 const ProductModel = require('../models/ProductModel');
 class PaymentController {
@@ -25,6 +25,7 @@ class PaymentController {
         cart: JSON.stringify(orderData),
       },
     });
+
     const session = await stripe.checkout.sessions.create({
       shipping_address_collection: {
         allowed_countries: ['PH'],
@@ -69,6 +70,7 @@ class PaymentController {
           quantity: item.quantity,
         };
       }),
+
       customer: customer.id,
       mode: 'payment',
       success_url: `${process.env.CLIENT}/user?session_id={CHECKOUT_SESSION_ID}`,
@@ -102,6 +104,7 @@ class PaymentController {
       case 'checkout.session.completed':
         const data = event.data.object;
         let customer = await stripe.customers.retrieve(data.customer);
+        console.log('customer', customer);
         customer = JSON.parse(customer?.metadata?.cart);
         customer.forEach(async (ctr) => {
           try {

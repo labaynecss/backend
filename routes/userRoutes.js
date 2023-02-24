@@ -1,11 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const {
-  register,
-  login,
-  forgotPassword,
-} = require('../controllers/userController');
+const { register, login } = require('../controllers/userController');
 const {
   registerValidations,
   loginValidations,

@@ -12,6 +12,7 @@ module.exports.registerValidations = [
     .withMessage('password should be 5 characters long'),
   body('mobileno')
     .isLength({ min: 11 })
+    .isLength({ max: 11 })
     .withMessage('mobile number should be 11 digits long'),
 ];
 

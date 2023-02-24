@@ -1,5 +1,6 @@
 const ProductModel = require('../models/ProductModel');
-const Product = require('./Product');
+
+const Review = require('../models/Reviews');
 class HomeProducts {
   async catProducts(req, res) {
     const { name, page, keyword } = req.params;

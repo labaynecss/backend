@@ -1,5 +1,5 @@
 const { validationResult } = require('express-validator');
-const UserModel = require('../models/UserModel');
+const UserModel = require('../models/User');
 
 const {
   hashedPassword,

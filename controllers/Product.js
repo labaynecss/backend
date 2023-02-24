@@ -14,14 +14,14 @@ class Product {
         if (parsedData.title.trim().length === 0) {
           errors.push({ msg: 'Title is required' });
         }
-        if (parseInt(parsedData.price) < 1) {
+        if (parseInt(parsedData.price) < 45) {
           errors.push({ msg: 'Price should be above ₱ 45' });
         }
         if (parseInt(parsedData.discount) < 0) {
           errors.push({ msg: 'Discount should not be negative' });
         }
-        if (parseInt(parsedData.stock) < 20) {
-          errors.push({ msg: 'Stock should be above 20' });
+        if (parseInt(parsedData.stock) < 10) {
+          errors.push({ msg: 'Stock should be above 10' });
         }
         if (fields.description.trim().length === 0) {
           errors.push({ msg: 'Description is required' });

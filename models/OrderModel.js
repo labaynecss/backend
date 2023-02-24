@@ -31,7 +31,7 @@ const orderSchema = Schema(
       default: false,
       type: Boolean,
     },
-    review: {
+    reviews: {
       default: false,
       type: Boolean,
     },

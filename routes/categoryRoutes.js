@@ -3,7 +3,6 @@ const router = express.Router();
 const categoryValidations = require('../validations/categoryValidation');
 const Category = require('../controllers/Category');
 const Authorization = require('../services/Authorization');
-
 router.post(
   '/create-category',
   [categoryValidations, Authorization.authorized],

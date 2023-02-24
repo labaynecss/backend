@@ -40,8 +40,8 @@ module.exports = [
     .withMessage('Description is required'),
   body('stock')
     .custom((value) => {
-      if (parseInt(value) < 20) {
-        throw new Error('Stock must be above 20');
+      if (parseInt(value) < 10) {
+        throw new Error('Stock must be above 10');
       } else {
         return parseInt(value);
       }
